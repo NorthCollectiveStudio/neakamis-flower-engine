@@ -81,6 +81,10 @@ def sha256_file(path):
 def pack_game(cfg, target, type_cfg, out_pkg, key=None, signer=None):
     bin_dir = os.path.join(ROOT, "bin")
     game_dir = os.path.join(ROOT, cfg["game"])
+    if not os.path.isdir(game_dir):
+        print(f"WARNING: the game folder '{game_dir}' does not exist - "
+              "the game package will be empty. Put the project of the game "
+              "there (the name is set in buildconfig.json).")
     cmd = [os.path.join(bin_dir, "flwpack"),
            "-dir", game_dir,
            "-out", out_pkg,
@@ -320,8 +324,10 @@ def build_target(name):
     os.makedirs(out_dir, exist_ok=True)
     pkg_dir = os.path.join(out_dir, "flwdata", "packages")
     os.makedirs(pkg_dir, exist_ok=True)
-    pkg_key, sign_seed, sign_pub = ensure_keys(cfg)
+    # The tools are built first: the keys are generated with flwpack and the
+    # tools are not a part of the repository.
     build_tools(cfg)
+    pkg_key, sign_seed, sign_pub = ensure_keys(cfg)
     if not os.path.exists(sign_pub):
         dummy = os.path.join(ROOT, "keys", "dummydir")
         os.makedirs(dummy, exist_ok=True)
