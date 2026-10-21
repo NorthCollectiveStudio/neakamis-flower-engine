@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>flower engine runtime</title>
+<style>
+html,body{margin:0;padding:0;height:100%;background:#04060a;overflow:hidden}
+.wrap{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.petal{width:74px;height:74px;border-radius:50% 50% 50% 0;background:linear-gradient(140deg,#f2b8d0,#c9a7e7);transform:rotate(-45deg);margin-bottom:34px;opacity:.92;box-shadow:0 0 44px rgba(210,160,230,.25)}
+.title{color:#e8edf4;font-size:20px;font-weight:600;letter-spacing:.06em}
+.sub{color:#5b6675;font-size:13px;margin-top:10px;letter-spacing:.04em}
+.bar{width:240px;height:3px;background:#1a2029;margin-top:34px;border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;width:40%;background:#fff;border-radius:2px;animation:slide 1.15s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-110%)}100%{transform:translateX(650%)}}
+.err{color:#e06a6a;font-size:13px;margin-top:22px;display:none;max-width:80%;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="petal"></div>
+  <div class="title">flower engine</div>
+  <div class="sub" id="st">browser runtime starting</div>
+  <div class="bar"><i></i></div>
+  <div class="err" id="err"></div>
+</div>
+<script>
+(function(){
+  var st=document.getElementById("st"),err=document.getElementById("err");
+  var q=location.search.indexOf("?"), boot="/boot"+location.search;
+  function fail(m){err.style.display="block";err.textContent=m;st.textContent="failed"}
+  fetch(boot,{credentials:"include"}).then(function(r){
+    if(!r.ok) throw new Error("boot endpoint: "+r.status);
+    st.textContent="launching game";
+    location.replace(boot);
+  }).catch(function(e){fail("engine not reachable: "+e.message)});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "su.neakami.flower"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "su.neakami.flower"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.19.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation files("libs/flwengine.aar")
+}

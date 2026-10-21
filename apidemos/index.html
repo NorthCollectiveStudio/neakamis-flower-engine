@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Demos</title>
+<link rel="stylesheet" href="/g/style.css">
+</head>
+<body>
+<div id="app">
+  
+  <div id="toolbar">
+    <div class="tb-left">
+      <div class="tb-logo"></div>
+      <span class="tb-title">API Demos</span>
+      <span class="tb-chip" id="bridge-chip">bridge: checking…</span>
+    </div>
+    <div class="tb-right">
+      <span id="tb-clock">00:00</span>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="cards">
+      
+      <div class="card" id="card-system">
+        <div class="card-head"><span class="accent cyan"></span>system</div>
+        <div class="card-body">
+          <div class="row">
+            <button class="pill" data-api="os">Nugget.getOS()</button>
+            <button class="pill" data-api="engine">getEngineInfo()</button>
+          </div>
+          <div class="row">
+            <button class="pill" data-api="touch">isTouch()</button>
+            <button class="pill" data-api="sysinfo">flwCall("sysinfo")</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-log">
+        <div class="card-head"><span class="accent orange"></span>log</div>
+        <div class="card-body">
+          <div class="field-line">
+            <label>category</label>
+            <input type="text" id="log-cat" value="apidemos" spellcheck="false">
+          </div>
+          <div class="field-line">
+            <label>message</label>
+            <input type="text" id="log-msg" value="hello from api demos" spellcheck="false">
+          </div>
+          <div class="field-line">
+            <label>level <b id="log-level-v">3</b></label>
+            <input type="range" id="log-level" min="0" max="6" step="1" value="3">
+          </div>
+          <div class="row">
+            <button class="pill accent-cyan" id="btn-log">Nugget.log()</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-shell">
+        <div class="card-head"><span class="accent red"></span>shell</div>
+        <div class="card-body">
+          <div class="field-line">
+            <label>command</label>
+            <input type="text" id="sh-cmd" value="echo hi from $(uname -s)" spellcheck="false">
+          </div>
+          <div class="row">
+            <button class="pill accent-cyan" id="btn-shell">Nugget.shellExec()</button>
+            <button class="pill" id="btn-shell-raw">flwCall("shell.exec")</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-window">
+        <div class="card-head"><span class="accent green"></span>window</div>
+        <div class="card-body">
+          <div class="row">
+            <button class="pill" data-move="-10,0">← move</button>
+            <button class="pill" data-move="10,0">move →</button>
+            <button class="pill" data-move="0,-10">move ↑</button>
+            <button class="pill" data-move="0,10">move ↓</button>
+          </div>
+          <div class="field-line">
+            <label>title</label>
+            <input type="text" id="win-title" value="API Demos" spellcheck="false">
+          </div>
+          <div class="row">
+            <button class="pill" id="btn-wtitle">set title</button>
+            <button class="pill" id="btn-wpos">get position</button>
+          </div>
+          <div class="row">
+            <button class="pill" id="btn-wsmall">640×360</button>
+            <button class="pill" id="btn-wnormal">1280×720</button>
+            <button class="pill" id="btn-wfs">fullscreen</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-dialog">
+        <div class="card-head"><span class="accent purple"></span>dialog</div>
+        <div class="card-body">
+          <div class="field-line">
+            <label>title</label>
+            <input type="text" id="dlg-title" value="API Demos" spellcheck="false">
+          </div>
+          <div class="field-line">
+            <label>text</label>
+            <input type="text" id="dlg-text" value="native dialog from the bridge" spellcheck="false">
+          </div>
+          <div class="row">
+            <button class="pill accent-cyan" id="btn-dialog">Nugget.dialog()</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-fs">
+        <div class="card-head"><span class="accent cyan"></span>filesystem (vfs)</div>
+        <div class="card-body">
+          <div class="field-line">
+            <label>path</label>
+            <input type="text" id="fs-path" value="apidemos-test.txt" spellcheck="false">
+          </div>
+          <div class="field-line">
+            <label>content</label>
+            <input type="text" id="fs-content" value="written by api demos" spellcheck="false">
+          </div>
+          <div class="row">
+            <button class="pill" data-fs="fs.write">write</button>
+            <button class="pill" data-fs="fs.read">read</button>
+            <button class="pill" data-fs="fs.exists">exists</button>
+          </div>
+          <div class="row">
+            <button class="pill" data-fs="fs.list">list ""</button>
+            <button class="pill" data-fs="fs.unlink">unlink</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-events">
+        <div class="card-head"><span class="accent orange"></span>events &amp; rpc</div>
+        <div class="card-body">
+          <div class="tumbler-line">
+            <span>echo incoming events</span>
+            <button class="tumbler" id="tumb-echo" aria-pressed="false"><span class="knob"></span></button>
+          </div>
+          <div class="field-line">
+            <label>event</label>
+            <input type="text" id="ev-name" value="apidemos.ping" spellcheck="false">
+          </div>
+          <div class="field-line">
+            <label>data</label>
+            <input type="text" id="ev-data" value="pong" spellcheck="false">
+          </div>
+          <div class="row">
+            <button class="pill accent-cyan" id="btn-emit">emitEvent()</button>
+            <button class="pill" id="btn-rpc-login">rpc.login</button>
+            <button class="pill" id="btn-rpc-clear">rpc.clear</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="card" id="card-exit">
+        <div class="card-head"><span class="accent red"></span>exit</div>
+        <div class="card-body">
+          <div class="tumbler-line">
+            <span>vibrate on exit (mobile)</span>
+            <button class="tumbler" id="tumb-vibe" aria-pressed="false"><span class="knob"></span></button>
+          </div>
+          <div class="row">
+            <button class="pill" id="btn-vibe">Nugget.vibrate()</button>
+            <button class="pill danger" id="btn-exit">exit app</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="term">
+      <div class="term-head">
+        <span class="dot cyan"></span> bridge console
+        <button class="term-clear" id="btn-clear">clear</button>
+      </div>
+      <div id="term-body"></div>
+      <div class="term-foot" id="term-status">idle</div>
+    </div>
+  </div>
+</div>
+<script src="/g/app.js"></script>
+</body>
+</html>

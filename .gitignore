@@ -1,0 +1,38 @@
+# the build output
+output/
+.buildcache/
+.obfcache/
+backups/
+
+# the built tools (they are built by build.py)
+bin/
+
+# the signing keys of the build: they are personal and must never be
+# committed
+keys/
+
+# the game itself: it is not a part of the engine
+therosemaryfield/
+
+# the packed packages of a build (they contain the game)
+*.nkpkg
+*.nkpkgenc
+*.nklog
+
+# the notes of the development (they are private)
+worklog.md
+
+# android
+android/app/build/
+android/app/libs/
+android/.gradle/
+android/build/
+
+# python
+scripts/__pycache__/
+__pycache__/
+
+# editors and systems
+.DS_Store
+*.swp
+*~

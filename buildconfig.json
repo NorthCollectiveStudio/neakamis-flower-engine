@@ -1,0 +1,155 @@
+{
+  "name": "rosemaryalterra",
+  "game": "therosemaryfield",
+  "gameTitle": "The Rosemary Field",
+  "gameVersion": "0.19.0",
+  "engine": "flwengine",
+  "output": "output",
+  "keys": "keys",
+  "types": {
+    "dev": {
+      "description": "plain packages, boot log into nuggetos dashboard, hot reload, devconsole",
+      "encryption": false,
+      "signing": false,
+      "obfuscation": false,
+      "guard": false,
+      "dashboard": true,
+      "bootlog": true,
+      "hotreload": true,
+      "devcomponents": true
+    },
+    "test": {
+      "description": "plain packages, boot log straight into game, hot reload, debug menu",
+      "encryption": false,
+      "signing": false,
+      "obfuscation": false,
+      "guard": false,
+      "dashboard": false,
+      "nodash": true,
+      "bootlog": true,
+      "hotreload": true,
+      "devcomponents": true
+    },
+    "prod": {
+      "description": "encrypted+signed prodgame package, signed runtime, no dev components except critical logging",
+      "encryption": true,
+      "signing": true,
+      "obfuscation": true,
+      "guard": true,
+      "dashboard": false,
+      "nodash": true,
+      "bootlog": false,
+      "hotreload": false,
+      "devcomponents": false,
+      "binaryobfuscation": true
+    }
+  },
+  "targets": {
+    "linux-dev": {
+      "platform": "linux",
+      "type": "dev",
+      "arch": "amd64",
+      "touch": false
+    },
+    "linux-test": {
+      "platform": "linux",
+      "type": "test",
+      "arch": "amd64",
+      "touch": false
+    },
+    "linux-prod": {
+      "platform": "linux",
+      "type": "prod",
+      "arch": "amd64",
+      "touch": false
+    },
+    "windows-dev": {
+      "platform": "windows",
+      "type": "dev",
+      "arch": "amd64",
+      "touch": false
+    },
+    "windows-test": {
+      "platform": "windows",
+      "type": "test",
+      "arch": "amd64",
+      "touch": false
+    },
+    "windows-prod": {
+      "platform": "windows",
+      "type": "prod",
+      "arch": "amd64",
+      "touch": false
+    },
+    "android-dev": {
+      "platform": "android",
+      "type": "dev",
+      "arch": "arm64",
+      "touch": true
+    },
+    "android-test": {
+      "platform": "android",
+      "type": "test",
+      "arch": "arm64",
+      "touch": true
+    },
+    "android-prod": {
+      "platform": "android",
+      "type": "prod",
+      "arch": "arm64",
+      "touch": true
+    }
+  },
+  "platforms": {
+    "linux": {
+      "gamePluginOverrides": {},
+      "env": {
+        "PKG_CONFIG_PATH": "~/pkgconfig"
+      }
+    },
+    "windows": {
+      "gamePluginOverrides": {},
+      "env": {
+        "CC": "x86_64-w64-mingw32-gcc",
+        "CXX": "x86_64-w64-mingw32-g++",
+        "CGO_ENABLED": "1"
+      }
+    },
+    "android": {
+      "gamePluginOverrides": {
+        "NOPHONE": "off",
+        "PKD_MobileControls": "on"
+      }
+    }
+  },
+  "packaging": {
+    "includes": [
+      "data",
+      "img",
+      "audio",
+      "js",
+      "css",
+      "fonts",
+      "icon",
+      "movies",
+      "effects",
+      "locales",
+      "index.html",
+      "package.json",
+      "game.rmmzproject"
+    ],
+    "excludes": [
+      "save",
+      ".git",
+      "node_modules",
+      "*.txt",
+      "*копия*",
+      "*.log",
+      "*~",
+      "*.rdcat",
+      "DEVCONCOLE.js",
+      "menu — копия.js",
+      "rmmz_scenesкопия.js"
+    ]
+  }
+}

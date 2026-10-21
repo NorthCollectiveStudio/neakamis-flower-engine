@@ -1,0 +1,11 @@
+{
+  "displayMode": "windowed",
+  "resolution": "1280x720",
+  "volume": 0.8,
+  "uiSounds": true,
+  "showFps": false,
+  "hotreloadOn": false,
+  "hotreloadIp": "127.0.0.1",
+  "hotreloadPort": 7777,
+  "workspace": 0
+}
